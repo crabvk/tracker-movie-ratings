@@ -1,0 +1,31 @@
+{
+  "name": "tracker-movie-ratings",
+  "version": "0.0.1",
+  "description": "KinoPoisk and IMDb movie ratings for torrent trackers",
+  "author": "Vyacheslav Konovalov",
+  "license": "MIT",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "aws4": "^1.8.0",
+    "md5": "^2.2.1",
+    "xhr": "^2.5.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "copy-webpack-plugin": "^4.5.2",
+    "raw-loader": "^0.5.1",
+    "standard": "^11.0.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  },
+  "standard": {
+    "globals": [
+      "chrome",
+      "DOMParser"
+    ]
+  }
+}
