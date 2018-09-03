@@ -84,7 +84,7 @@ const getCredentials = () => {
     let decrypted = decipher.update(encrypted, 'hex', 'utf8')
     decrypted += decipher.final('utf8')
     credentials = JSON.parse(decrypted)
-    return credentials
+    return Promise.resolve(credentials)
   }
   return requestCredentials()
     .then(({ accessKeyId, expirationTimeStamp, secretAccessKey, sessionToken }) => {
