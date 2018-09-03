@@ -16,6 +16,8 @@ const requestCredentials = () => new Promise((resolve, reject) => {
       const json = JSON.parse(body)
       resolve(json.resource)
     } else {
+      // TODO: check if err is null, read body to get error message
+      // (not only here)
       console.error('IMDb credentials request error', err, resp)
       reject(err)
     }

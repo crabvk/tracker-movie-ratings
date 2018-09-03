@@ -47,7 +47,7 @@ if (keysParams.size > 0) {
     const updateCells = (fn, arg) =>
       document.querySelectorAll(`#tor-tbl tbody td.tmr-${provider}-${key}`)
         .forEach(td => fn(td, arg))
-    find[provider](params)
+    find[provider](key, params)
       .then(movie => updateCells(setCellResult, movie))
       .catch(error => updateCells(setCellError, error))
       .then(() => {

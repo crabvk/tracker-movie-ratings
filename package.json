@@ -8,6 +8,7 @@
   "scripts": {},
   "dependencies": {
     "aws4": "^1.8.0",
+    "lscache": "^1.2.0",
     "md5": "^2.2.1",
     "xhr": "^2.5.0"
   },
