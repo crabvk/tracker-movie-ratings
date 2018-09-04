@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "RuTracker Movie Ratings",
   "description": "KinoPoisk and IMDb movie ratings for RuTracker.org",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "page_action": {
     "default_icon": {
       "16": "images/icon16.png",

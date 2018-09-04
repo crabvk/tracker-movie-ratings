@@ -67,8 +67,8 @@ const findKinopoisk = (key, params) => {
 
 const mapImdbResult = r => ({
   title: r.l,
-  year: r.y.toString(),
-  rating: r.rating.toFixed(1),
+  year: r.y ? r.y.toString() : null,
+  rating: isFinite(r.rating) ? r.rating.toFixed(1) : null,
   link: `https://www.imdb.com/title/${r.id}/`
 })
 
