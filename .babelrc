@@ -1,4 +1,9 @@
 {
-  "presets": [["env", { "targets": { "chrome": "65" } }]],
-  "plugins": ["transform-object-rest-spread"],
+  "presets": [
+    [
+      "@babel/preset-env", {
+        "targets": { "chrome": "67" }
+      }
+    ]
+  ]
 }
