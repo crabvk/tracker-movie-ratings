@@ -1,5 +1,5 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -23,16 +23,9 @@ module.exports = {
       'src/background.js',
       'src/styles.css',
       { from: 'images', to: 'images' }
-    ]),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        warnings: false,
-        compress: {
-          drop_debugger: true,
-          drop_console: true
-        },
-        output: { comments: false }
-      }
-    })
-  ]
+    ])
+  ],
+  optimization: {
+    minimizer: [new TerserPlugin()]
+  }
 }
