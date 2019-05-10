@@ -49,10 +49,11 @@ const findKinopoisk = (key, params) => {
   }
   return searchKinopoisk(params.title)
     .then(results => {
-      const filtered = applyFilters(results, [
-        r => r.nameEN.match(titleRegExp(params.title)),
-        r => r.year && r.year.toString().match(yearRegExp(params.year))
-      ])
+      const filters = [r => r.nameEN.match(titleRegExp(params.title))]
+      if (params.year) {
+        filters.push(r => r.year && r.year.match(yearRegExp(params.year)))
+      }
+      const filtered = applyFilters(results, filters)
       if (filtered.length === 0) {
         throw errors.nothingFound
       }
@@ -61,6 +62,7 @@ const findKinopoisk = (key, params) => {
       return movie
     })
     .catch(error => {
+      console.log(error)
       throw (error ? (error.message || error.toString()) : errors.unknown)
     })
 }
@@ -115,10 +117,11 @@ const findImdb = (key, params) => {
       if (params.type === 'serial') {
         filters.push(r => r.q === 'TV series')
       }
-      const filtered = applyFilters(results, filters.concat([
-        r => r.l.match(titleRegExp(params.title)),
-        r => r.y && r.y.toString().match(yearRegExp(params.year))
-      ]))
+      filters.push(r => r.l.match(titleRegExp(params.title)))
+      if (params.year) {
+        filters.push(r => r.y && r.y.toString().match(yearRegExp(params.year)))
+      }
+      const filtered = applyFilters(results, filters)
       if (filtered.length === 0) {
         throw errors.nothingFound
       }

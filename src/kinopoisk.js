@@ -1,4 +1,3 @@
-import xhr from 'xhr'
 import md5 from 'md5'
 import { rfc3986EncodeURIComponent } from './utils'
 
@@ -20,23 +19,24 @@ const search = query => {
   console.info(`Kinopoisk search request for "${query}"`)
   const q = rfc3986EncodeURIComponent(query)
   const path = `getKPSearchInFilms?keyword=${q}&page=1`
+
   return new Promise((resolve, reject) => {
-    xhr({
-      method: 'get',
-      uri: API_URI + path,
-      headers: getHeaders(path)
-    }, (err, resp, body) => {
-      if (resp.statusCode === 200) {
-        const json = JSON.parse(body)
-        if (json.data.pagesCount > 0) {
-          resolve(json.data.searchFilms)
-        } else {
-          console.warn(`Kinopoisk empty search result for "${query}"`)
-          resolve([])
-        }
+    chrome.runtime.sendMessage({
+      action: 'fetchRequest',
+      url: API_URI + path,
+      fetchOptions: {
+        headers: getHeaders(path)
+      },
+      onError: error => {
+        console.error(`Kinopoisk search error for "${query}"`, error)
+        reject(error)
+      }
+    }, json => {
+      if (json && json.data && json.data.pagesCount > 0) {
+        resolve(json.data.searchFilms)
       } else {
-        console.error(`Kinopoisk search error for "${query}"`, err, resp)
-        reject(err)
+        console.warn(`Kinopoisk empty search result for "${query}"`)
+        resolve([])
       }
     })
   })

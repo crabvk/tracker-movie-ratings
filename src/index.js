@@ -31,7 +31,7 @@ document.querySelectorAll('#tor-tbl tbody tr').forEach(tr => {
 })
 
 if (keysParams.size > 0) {
-  chrome.runtime.sendMessage({ from: 'content', subject: 'showPageAction' })
+  chrome.runtime.sendMessage({ action: 'showPageAction' })
 
   const find = {
     kinopoisk: findKinopoisk,
@@ -66,5 +66,5 @@ if (keysParams.size > 0) {
   sequence('kinopoisk', ...queries['kinopoisk'].next().value)
   sequence('imdb', ...queries['imdb'].next().value)
 } else {
-  chrome.runtime.sendMessage({ from: 'content', subject: 'hidePageAction' })
+  chrome.runtime.sendMessage({ action: 'hidePageAction' })
 }
